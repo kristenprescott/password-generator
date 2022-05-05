@@ -1,4 +1,5 @@
-import { Stack, Checkbox } from "@chakra-ui/react";
+import { Stack, Checkbox, Icon, Text, HStack, Tooltip } from "@chakra-ui/react";
+import { FiInfo } from "react-icons/fi";
 
 interface Props {
   isUppercase: boolean;
@@ -29,7 +30,14 @@ export const PasswordCharsCheckboxes = ({
         spacing="1rem"
         defaultChecked
       >
-        Uppercase
+        <HStack direction="row" isInline>
+          <Text>Uppercase</Text>
+          <Tooltip label="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+            <span>
+              <Icon as={FiInfo} w={4} h={4} color="blue.500" />
+            </span>
+          </Tooltip>
+        </HStack>
       </Checkbox>
       <Checkbox
         isChecked={isLowercase}
@@ -37,7 +45,14 @@ export const PasswordCharsCheckboxes = ({
         spacing="1rem"
         defaultChecked
       >
-        Lowercase
+        <HStack direction="row" isInline>
+          <Text>Lowercase</Text>
+          <Tooltip label="abcdefghijklmnopqrstuvwxyz">
+            <span>
+              <Icon as={FiInfo} w={4} h={4} color="blue.500" />
+            </span>
+          </Tooltip>
+        </HStack>
       </Checkbox>
       <Checkbox
         isChecked={isNumeric}
@@ -45,7 +60,14 @@ export const PasswordCharsCheckboxes = ({
         spacing="1rem"
         defaultChecked
       >
-        Numbers
+        <HStack direction="row" isInline>
+          <Text>Numeric</Text>
+          <Tooltip label="01234567890">
+            <span>
+              <Icon as={FiInfo} w={4} h={4} color="blue.500" />
+            </span>
+          </Tooltip>
+        </HStack>
       </Checkbox>
       <Checkbox
         isChecked={isSymbolic}
@@ -53,7 +75,14 @@ export const PasswordCharsCheckboxes = ({
         spacing="1rem"
         defaultChecked
       >
-        Symbols
+        <HStack direction="row" isInline>
+          <Text>Symbolic</Text>
+          <Tooltip label="!@#$%^&*()<>,.?/[]{}-=_+|/">
+            <span>
+              <Icon as={FiInfo} w={4} h={4} color="blue.500" />
+            </span>
+          </Tooltip>
+        </HStack>
       </Checkbox>
     </Stack>
   );
