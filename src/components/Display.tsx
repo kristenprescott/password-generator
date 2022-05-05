@@ -5,22 +5,13 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   Stack,
   Text,
-  Flex,
-  SliderFilledTrack,
-  Slider,
-  SliderThumb,
-  SliderTrack,
 } from "@chakra-ui/react";
 import { InlineStylesModel } from "models/InlineStylesModel";
 import { useState, useRef } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { PasswordLengthInputs } from "./PasswordLengthInputs";
 
 const styles: InlineStylesModel = {
   main: {
@@ -119,44 +110,12 @@ export const Display = (): JSX.Element => {
           <Button onClick={handleCopy}>Copy</Button>
         </CopyToClipboard>
 
-        <Text>Password length: {passwordLength}</Text>
-        <Flex>
-          <NumberInput
-            min={1}
-            max={30}
-            step={1}
-            inputMode="numeric"
-            defaultValue={passwordLength}
-            value={passwordLength}
-            onChange={handleNumberChange}
-            mr="1rem"
-            maxW={75}
-            allowMouseWheel
-            focusBorderColor="gray.300"
-          >
-            <NumberInputField />
-            <NumberInputStepper>
-              <NumberIncrementStepper bg="white" _active={{ bg: "gray.300" }} />
-              <NumberDecrementStepper bg="white" _active={{ bg: "gray.300" }} />
-            </NumberInputStepper>
-          </NumberInput>
-
-          <Slider
-            flex="1"
-            focusThumbOnChange={false}
-            value={passwordLength}
-            onChange={handleSliderChange}
-          >
-            <SliderTrack>
-              <SliderFilledTrack />
-            </SliderTrack>
-            <SliderThumb
-              fontSize="sm"
-              boxSize="32px"
-              children={passwordLength}
-            />
-          </Slider>
-        </Flex>
+        <PasswordLengthInputs
+          passwordLength={passwordLength}
+          _setPasswordLength={_setPasswordLength}
+          handleSliderChange={handleSliderChange}
+          handleNumberChange={handleNumberChange}
+        />
       </Stack>
     </div>
   );
