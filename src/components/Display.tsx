@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { InlineStylesModel } from "models/InlineStylesModel";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 const styles: InlineStylesModel = {
@@ -25,21 +25,15 @@ const styles: InlineStylesModel = {
 };
 
 export const Display = (): JSX.Element => {
-  const [password, _setPassword] = useState("");
+  const [value, _setValue] = useState("");
   const [copy, _setCopy] = useState("");
 
-  const passwordRef = useRef(null);
-  console.log(password, passwordRef);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void =>
+    _setValue(event.target.value);
 
   const handleCopy = () => {
-    _setCopy(password);
+    _setCopy(value);
   };
-
-  const copyText = () => {
-    navigator.clipboard.writeText("http://localhost:3000/");
-    alert(`Copied ${password} to clipboard`);
-  };
-  console.log(copyText);
 
   const handleGenerate = () => {
     console.log("hi");
@@ -48,6 +42,7 @@ export const Display = (): JSX.Element => {
   return (
     <div style={styles.main}>
       <Stack spacing={4}>
+        <Text>Value: {value}</Text>
         <Text>Copy: {copy}</Text>
         <InputGroup>
           <InputRightElement
@@ -58,9 +53,6 @@ export const Display = (): JSX.Element => {
                     <Icon as={FiCopy} w={5} h={5} color="gray.500" />
                   </Button>
                 </CopyToClipboard>
-                <Button variant="ghost" onClick={copyText}>
-                  <Icon as={FiCopy} w={5} h={5} color="red.500" />
-                </Button>
                 <Button variant="ghost" onClick={handleGenerate}>
                   <Icon as={FiRefreshCcw} w={5} h={5} color="gray.500" />
                 </Button>
@@ -70,8 +62,8 @@ export const Display = (): JSX.Element => {
           <Input
             type="text"
             variant="flushed"
-            value={password}
-            ref={passwordRef}
+            onChange={handleChange}
+            value={value}
             size="lg"
             focusBorderColor="tomato"
             isReadOnly
@@ -81,13 +73,6 @@ export const Display = (): JSX.Element => {
         <CopyToClipboard text={copy}>
           <Button onClick={handleCopy}>Copy</Button>
         </CopyToClipboard>
-
-        {/* <Icon viewBox="0 0 200 200" color="gray.500">
-          <path
-            fill="currentColor"
-            d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-          />
-        </Icon> */}
       </Stack>
     </div>
   );
