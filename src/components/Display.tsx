@@ -129,7 +129,9 @@ export const Display = (): JSX.Element => {
         </InputGroup>
 
         <CopyToClipboard text={copy}>
-          <Button onClick={handleCopy}>Copy</Button>
+          <Button onClick={handleCopy} isDisabled={!password.length}>
+            Copy
+          </Button>
         </CopyToClipboard>
 
         <PasswordLengthInputs
