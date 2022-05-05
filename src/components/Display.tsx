@@ -88,8 +88,34 @@ export const Display = (): JSX.Element => {
     return "";
   };
 
-  const generatePassword = () => {
-    alert(`Generating password ${passwordLength}...`);
+  const randomizePassword = () => {
+    const randomPassword =
+      Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+
+    _setPassword(randomPassword);
+
+    navigator.clipboard.writeText(randomPassword);
+  };
+
+  const generateCharString = () => {
+    let chars = "";
+    if (isUppercase) {
+      chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+    }
+    if (isLowercase) {
+      chars += "abcdefghijklmnopqrstuvwxyz ";
+    }
+    if (isSymbolic) {
+      chars += "!@#$%^&*()<>,.?/[]{}-=_+|/";
+    }
+    if (isNumeric) {
+      chars += "0123456789";
+    }
+    _setCharacters(chars);
+  };
+
+  const generateNewPassword = () => {
+    generateCharString();
     _setPassword(passwordCharacters(characters, passwordLength));
   };
 
@@ -103,20 +129,6 @@ export const Display = (): JSX.Element => {
 
   return (
     <div style={styles.main}>
-      <Text>Uppercase: {isUppercase.toString()}</Text>
-      <Text>Lowercase: {isLowercase.toString()}</Text>
-      <Text>Numeric: {isNumeric.toString()}</Text>
-      <Text>Symbolic: {isSymbolic.toString()}</Text>
-      <Text>
-        Options:{" "}
-        {radioValue === "1"
-          ? "Easy to say"
-          : radioValue === "2"
-          ? "Easy to read"
-          : radioValue === "3"
-          ? "All chars"
-          : null}
-      </Text>
       <Text>Copy: {copy}</Text>
 
       <Stack spacing={4}>
@@ -129,7 +141,7 @@ export const Display = (): JSX.Element => {
                     <Icon as={FiCopy} w={5} h={5} color="gray.500" />
                   </Button>
                 </CopyToClipboard>
-                <Button variant="ghost" onClick={generatePassword}>
+                <Button variant="ghost" onClick={generateNewPassword}>
                   <Icon as={FiRefreshCcw} w={5} h={5} color="gray.500" />
                 </Button>
               </>
@@ -145,6 +157,10 @@ export const Display = (): JSX.Element => {
             isReadOnly
           />
         </InputGroup>
+
+        <Button onClick={randomizePassword}>
+          Generate & copy to clipboard
+        </Button>
 
         <CopyToClipboard text={copy}>
           <Button onClick={handleCopy} isDisabled={!password.length}>
