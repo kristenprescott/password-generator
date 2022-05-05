@@ -15,6 +15,7 @@ import { useState, useRef } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { PasswordLengthInputs } from "./PasswordLengthInputs";
 import { PasswordCharsCheckboxes } from "./PasswordCharsCheckboxes";
+import { PasswordOptions } from "./PasswordOptions";
 
 const styles: InlineStylesModel = {
   main: {
@@ -34,10 +35,14 @@ export const Display = (): JSX.Element => {
   );
   const [password, _setPassword] = useState("");
   const [passwordLength, _setPasswordLength] = useState(12);
+
   const [isUppercase, _setIsUppercase] = useState(true);
   const [isLowercase, _setIsLowercase] = useState(true);
   const [isNumeric, _setIsNumeric] = useState(true);
   const [isSymbolic, _setIsSymbolic] = useState(true);
+
+  const [radioValue, _setRadioValue] = useState("3");
+
   const [copy, _setCopy] = useState("");
 
   const passwordRef = useRef(null);
@@ -53,12 +58,15 @@ export const Display = (): JSX.Element => {
   const handleUppercaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     _setIsUppercase(e.target.checked);
   };
+
   const handleLowercaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     _setIsLowercase(e.target.checked);
   };
+
   const handleNumericChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     _setIsNumeric(e.target.checked);
   };
+
   const handleSymbolicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     _setIsSymbolic(e.target.checked);
   };
@@ -95,13 +103,23 @@ export const Display = (): JSX.Element => {
 
   return (
     <div style={styles.main}>
-      <Stack spacing={4}>
-        <Text>Uppercase: {isUppercase.toString()}</Text>
-        <Text>Lowercase: {isLowercase.toString()}</Text>
-        <Text>Numeric: {isNumeric.toString()}</Text>
-        <Text>Symbolic: {isSymbolic.toString()}</Text>
-        <Text>Copy: {copy}</Text>
+      <Text>Uppercase: {isUppercase.toString()}</Text>
+      <Text>Lowercase: {isLowercase.toString()}</Text>
+      <Text>Numeric: {isNumeric.toString()}</Text>
+      <Text>Symbolic: {isSymbolic.toString()}</Text>
+      <Text>
+        Options:{" "}
+        {radioValue === "1"
+          ? "Easy to say"
+          : radioValue === "2"
+          ? "Easy to read"
+          : radioValue === "3"
+          ? "All chars"
+          : null}
+      </Text>
+      <Text>Copy: {copy}</Text>
 
+      <Stack spacing={4}>
         <InputGroup>
           <InputRightElement
             children={
@@ -142,6 +160,11 @@ export const Display = (): JSX.Element => {
         />
 
         <Flex justifyContent="center" alignItems="center">
+          <PasswordOptions
+            radioValue={radioValue}
+            _setRadioValue={_setRadioValue}
+          />
+          <Spacer />
           <PasswordCharsCheckboxes
             isUppercase={isUppercase}
             isLowercase={isLowercase}

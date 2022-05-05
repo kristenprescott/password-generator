@@ -32,7 +32,7 @@ export const PasswordCharsCheckboxes = ({
       >
         <HStack direction="row" isInline>
           <Text>Uppercase</Text>
-          <Tooltip label="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+          <Tooltip label="ABCDEFGHIJKLMNOPQRSTUVWXYZ" hasArrow>
             <span>
               <Icon as={FiInfo} w={4} h={4} color="blue.500" />
             </span>
@@ -47,7 +47,7 @@ export const PasswordCharsCheckboxes = ({
       >
         <HStack direction="row" isInline>
           <Text>Lowercase</Text>
-          <Tooltip label="abcdefghijklmnopqrstuvwxyz">
+          <Tooltip label="abcdefghijklmnopqrstuvwxyz" hasArrow>
             <span>
               <Icon as={FiInfo} w={4} h={4} color="blue.500" />
             </span>
@@ -62,7 +62,7 @@ export const PasswordCharsCheckboxes = ({
       >
         <HStack direction="row" isInline>
           <Text>Numeric</Text>
-          <Tooltip label="01234567890">
+          <Tooltip label="01234567890" hasArrow>
             <span>
               <Icon as={FiInfo} w={4} h={4} color="blue.500" />
             </span>
@@ -77,7 +77,7 @@ export const PasswordCharsCheckboxes = ({
       >
         <HStack direction="row" isInline>
           <Text>Symbolic</Text>
-          <Tooltip label="!@#$%^&*()<>,.?/[]{}-=_+|/">
+          <Tooltip label="!@#$%^&*()<>,.?/[]{}-=_+|/" hasArrow>
             <span>
               <Icon as={FiInfo} w={4} h={4} color="blue.500" />
             </span>
