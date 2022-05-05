@@ -1,26 +1,45 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "allowJs": true /* Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files. */,
+    "allowSyntheticDefaultImports": true /* Allow 'import x from y' when a module doesn't have a default export. */,
+    "baseUrl": "src" /* Specify the base directory to resolve non-relative module names. */,
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */,
+    "experimentalDecorators": true /* Enable experimental support for TC39 stage 2 draft decorators. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "isolatedModules": true /* Ensure that each file can be safely transpiled without relying on other imports. */,
+    "jsx": "react-jsx" /* Specify what JSX code is generated. */,
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+      "esnext",
+      "esnext.asynciterable"
+    ] /* Specify a set of bundled library declaration files that describe the target runtime environment. */,
+    "module": "esnext" /* Specify what module code is generated. */,
+    "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "noEmit": true /* Disable emitting files from a compilation. */,
+    "noFallthroughCasesInSwitch": true /* Enable error reporting for fallthrough cases in switch statements. */,
+    "noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied `any` type.. */,
+    "noImplicitReturns": true /* Enable error reporting for codepaths that do not explicitly return in a function. */,
+    "noImplicitThis": true /* Enable error reporting when `this` is given the type `any`. */,
+    "noUnusedLocals": true /* Enable error reporting when a local variables aren't read. */,
+    "outDir": "build/dist" /* Specify an output folder for all emitted files. */,
+    "resolveJsonModule": true /* Enable importing .json files */,
+    "rootDir": "src" /* Specify the root folder within your source files. */,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "sourceMap": true /* Create source map files for emitted JavaScript files. */,
+    "strict": true /* Enable all strict type-checking options. */,
+    "strictNullChecks": true /* When type checking, take into account `null` and `undefined`. */,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
   },
-  "include": [
-    "src"
-  ]
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
+  ],
+  "include": ["src"]
 }
