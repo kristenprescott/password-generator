@@ -12,17 +12,16 @@ import { FiInfo } from "react-icons/fi";
 interface Props {
   radioValue: string;
   _setRadioValue: React.Dispatch<React.SetStateAction<string>>;
+  handleRadioChange: (nextValue: string) => void;
 }
 
-export const PasswordOptions = ({ radioValue, _setRadioValue }: Props) => {
-  const handleChange = (nextValue: string) => {
-    const val = nextValue;
-    _setRadioValue(nextValue.toString());
-    alert(val);
-  };
-
+export const PasswordOptions = ({
+  radioValue,
+  _setRadioValue,
+  handleRadioChange,
+}: Props) => {
   return (
-    <RadioGroup onChange={handleChange} value={radioValue}>
+    <RadioGroup onChange={handleRadioChange} value={radioValue}>
       <Stack pl={6} mt={1} spacing={1}>
         <Radio value="1">
           <HStack direction="row" isInline>

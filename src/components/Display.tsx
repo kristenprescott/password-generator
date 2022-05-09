@@ -58,6 +58,33 @@ export const Display = (): JSX.Element => {
     if (e.target.checked === true) _setIncludeSymbols(true);
   };
 
+  const handleRadioChange = (nextValue: string) => {
+    const val = nextValue.toString();
+    _setRadioValue(val);
+
+    if (val === "1") {
+      _setIncludeUpper(true);
+      _setIncludeLower(true);
+      _setIncludeNumbers(false);
+      _setIncludeSymbols(false);
+    }
+
+    if (val === "2") {
+      console.log("Easy to read");
+    }
+
+    if (val === "3") {
+      console.log("Easy to remember");
+    }
+
+    if (val === "4") {
+      _setIncludeUpper(true);
+      _setIncludeLower(true);
+      _setIncludeNumbers(true);
+      _setIncludeSymbols(true);
+    }
+  };
+
   const randomizePassword = () => {
     if (!includeUpper && !includeLower && !includeNumbers && !includeSymbols)
       alert("Must check at least one option!");
@@ -139,6 +166,7 @@ export const Display = (): JSX.Element => {
           <PasswordOptions
             radioValue={radioValue}
             _setRadioValue={_setRadioValue}
+            handleRadioChange={handleRadioChange}
           />
         </HStack>
       </Stack>
