@@ -15,25 +15,29 @@ interface Props {
 }
 
 export const PasswordOptions = ({ radioValue, _setRadioValue }: Props) => {
+  const handleChange = (nextValue: string) => {
+    const val = nextValue;
+    _setRadioValue(nextValue.toString());
+    alert(val);
+  };
+
   return (
-    <RadioGroup onChange={_setRadioValue} value={radioValue}>
+    <RadioGroup onChange={handleChange} value={radioValue}>
       <Stack pl={6} mt={1} spacing={1}>
         <Radio value="1">
           <HStack direction="row" isInline>
             <Text>Easy to say</Text>
-            <Tooltip
-              label="Avoid numbers/special chars & include real words"
-              hasArrow
-            >
+            <Tooltip label="Avoid numbers and symbols" hasArrow>
               <span>
                 <Icon as={FiInfo} w={4} h={4} color="blue.500" />
               </span>
             </Tooltip>
           </HStack>
         </Radio>
+
         <Radio value="2">
           <HStack direction="row" isInline>
-            <Text>East to read</Text>
+            <Text>Easy to read</Text>
             <Tooltip
               label="Avoid ambigious chars like I, l, 1, O, and 0"
               hasArrow
@@ -44,10 +48,25 @@ export const PasswordOptions = ({ radioValue, _setRadioValue }: Props) => {
             </Tooltip>
           </HStack>
         </Radio>
+
         <Radio value="3">
           <HStack direction="row" isInline>
+            <Text>Easy to remember</Text>
+            <Tooltip label="Use real words" hasArrow>
+              <span>
+                <Icon as={FiInfo} w={4} h={4} color="blue.500" />
+              </span>
+            </Tooltip>
+          </HStack>
+        </Radio>
+
+        <Radio value="4">
+          <HStack direction="row" isInline>
             <Text>All characters</Text>
-            <Tooltip label="Any char combos" hasArrow>
+            <Tooltip
+              label="Include uppercase, lowercase, numbers, and symbols"
+              hasArrow
+            >
               <span>
                 <Icon as={FiInfo} w={4} h={4} color="blue.500" />
               </span>

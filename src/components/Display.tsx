@@ -6,12 +6,15 @@ import {
   InputGroup,
   InputRightElement,
   Stack,
+  HStack,
+  Spacer,
 } from "@chakra-ui/react";
 import { InlineStylesModel } from "models/InlineStylesModel";
 import { useState, useRef } from "react";
 import { PasswordLengthInputs } from "./PasswordLengthInputs";
 import { uppercase, lowercase, numbers, symbols } from "../common/characters";
 import { CharacterOptions } from "./CharacterOptions";
+import { PasswordOptions } from "./PasswordOptions";
 
 const styles: InlineStylesModel = {
   main: {
@@ -33,6 +36,8 @@ export const Display = (): JSX.Element => {
   const [includeLower, _setIncludeLower] = useState(true);
   const [includeNumbers, _setIncludeNumbers] = useState(true);
   const [includeSymbols, _setIncludeSymbols] = useState(true);
+
+  const [radioValue, _setRadioValue] = useState("4");
 
   const passwordRef = useRef(null);
 
@@ -119,16 +124,23 @@ export const Display = (): JSX.Element => {
           _setPasswordLength={_setPasswordLength}
         />
 
-        <CharacterOptions
-          includeUpper={includeUpper}
-          includeLower={includeLower}
-          includeNumbers={includeNumbers}
-          includeSymbols={includeSymbols}
-          handleUpperChange={handleUpperChange}
-          handleLowerChange={handleLowerChange}
-          handleNumbersChange={handleNumbersChange}
-          handleSymbolsChange={handleSymbolsChange}
-        />
+        <HStack>
+          <CharacterOptions
+            includeUpper={includeUpper}
+            includeLower={includeLower}
+            includeNumbers={includeNumbers}
+            includeSymbols={includeSymbols}
+            handleUpperChange={handleUpperChange}
+            handleLowerChange={handleLowerChange}
+            handleNumbersChange={handleNumbersChange}
+            handleSymbolsChange={handleSymbolsChange}
+          />
+          <Spacer />
+          <PasswordOptions
+            radioValue={radioValue}
+            _setRadioValue={_setRadioValue}
+          />
+        </HStack>
       </Stack>
     </div>
   );
