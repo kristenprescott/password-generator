@@ -8,14 +8,14 @@ import {
   InputRightElement,
   Spacer,
   Stack,
-  Text,
 } from "@chakra-ui/react";
 import { InlineStylesModel } from "models/InlineStylesModel";
 import { useState, useRef } from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
+// import { useState, useRef, useEffect } from "react";
 import { PasswordLengthInputs } from "./PasswordLengthInputs";
 import { PasswordCharsCheckboxes } from "./PasswordCharsCheckboxes";
 import { PasswordOptions } from "./PasswordOptions";
+import { uppercase, lowercase, numbers, symbols } from "../common/characters";
 
 const styles: InlineStylesModel = {
   main: {
@@ -30,20 +30,16 @@ const styles: InlineStylesModel = {
 };
 
 export const Display = (): JSX.Element => {
-  const [characters, _setCharacters] = useState(
+  const [charset, _setCharset] = useState(
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()<>,.?/[]{}-=_+|/0123456789"
   );
   const [password, _setPassword] = useState("");
   const [passwordLength, _setPasswordLength] = useState(12);
-
   const [isUppercase, _setIsUppercase] = useState(true);
   const [isLowercase, _setIsLowercase] = useState(true);
   const [isNumeric, _setIsNumeric] = useState(true);
   const [isSymbolic, _setIsSymbolic] = useState(true);
-
   const [radioValue, _setRadioValue] = useState("3");
-
-  const [copy, _setCopy] = useState("");
 
   const passwordRef = useRef(null);
 
@@ -57,6 +53,8 @@ export const Display = (): JSX.Element => {
 
   const handleUppercaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     _setIsUppercase(e.target.checked);
+    if (isUppercase === true)
+      _setCharset(charset + "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
   };
 
   const handleLowercaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,23 +69,6 @@ export const Display = (): JSX.Element => {
     _setIsSymbolic(e.target.checked);
   };
 
-  const getRandomInteger = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-
-  const passwordCharacters = (
-    characters: string,
-    passwordLength: number
-  ): string => {
-    if (characters.length) {
-      for (let i = 0; i < passwordLength; i++) {
-        _setCharacters(characters[getRandomInteger(0, characters.length - 1)]);
-        return characters;
-      }
-    }
-    return "";
-  };
-
   const randomizePassword = () => {
     const randomPassword =
       Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
@@ -97,50 +78,37 @@ export const Display = (): JSX.Element => {
     navigator.clipboard.writeText(randomPassword);
   };
 
-  const generateCharString = () => {
-    let chars = "";
-    if (isUppercase) {
-      chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
-    }
-    if (isLowercase) {
-      chars += "abcdefghijklmnopqrstuvwxyz ";
-    }
-    if (isSymbolic) {
-      chars += "!@#$%^&*()<>,.?/[]{}-=_+|/";
-    }
-    if (isNumeric) {
-      chars += "0123456789";
-    }
-    _setCharacters(chars);
-  };
-
   const generateNewPassword = () => {
-    generateCharString();
-    _setPassword(passwordCharacters(characters, passwordLength));
-  };
+    // generateCharset();
+    // _setPassword(passwordCharacters(characters, passwordLength));
 
-  const handleCopy = () => {
-    _setCopy(password);
+    randomizePassword();
   };
 
   const copyClipboard = () => {
-    console.log("copying...");
+    navigator.clipboard.writeText(password);
   };
 
   return (
     <div style={styles.main}>
-      <Text>Copy: {copy}</Text>
-
+      <p>{uppercase}</p>
+      <p>{lowercase}</p>
+      <p>{numbers}</p>
+      <p>{symbols}</p>
+      <p>Charset: {charset ? charset : "N/A"}</p>
+      <p>Length: {passwordLength}</p>
+      <p>Uppercase: {isUppercase ? "true" : "false"}</p>
+      <p>Lowercase: {isLowercase ? "true" : "false"}</p>
+      <p>Numeric: {isNumeric ? "true" : "false"}</p>
+      <p>Symbolic: {isSymbolic ? "true" : "false"}</p>
       <Stack spacing={4}>
         <InputGroup>
           <InputRightElement
             children={
               <>
-                <CopyToClipboard text={copy}>
-                  <Button variant="ghost" onClick={copyClipboard}>
-                    <Icon as={FiCopy} w={5} h={5} color="gray.500" />
-                  </Button>
-                </CopyToClipboard>
+                <Button variant="ghost" onClick={copyClipboard}>
+                  <Icon as={FiCopy} w={5} h={5} color="gray.500" />
+                </Button>
                 <Button variant="ghost" onClick={generateNewPassword}>
                   <Icon as={FiRefreshCcw} w={5} h={5} color="gray.500" />
                 </Button>
@@ -161,12 +129,6 @@ export const Display = (): JSX.Element => {
         <Button onClick={randomizePassword}>
           Generate & copy to clipboard
         </Button>
-
-        <CopyToClipboard text={copy}>
-          <Button onClick={handleCopy} isDisabled={!password.length}>
-            Copy
-          </Button>
-        </CopyToClipboard>
 
         <PasswordLengthInputs
           passwordLength={passwordLength}
