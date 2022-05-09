@@ -12,7 +12,13 @@ import {
 import { InlineStylesModel } from "models/InlineStylesModel";
 import { useState, useRef } from "react";
 import { PasswordLengthInputs } from "./PasswordLengthInputs";
-import { uppercase, lowercase, numbers, symbols } from "../common/characters";
+import {
+  uppercase,
+  lowercase,
+  numbers,
+  symbols,
+  simpleCharset,
+} from "../common/characters";
 import { CharacterOptions } from "./CharacterOptions";
 import { PasswordOptions } from "./PasswordOptions";
 
@@ -38,6 +44,7 @@ export const Display = (): JSX.Element => {
   const [includeSymbols, _setIncludeSymbols] = useState(true);
 
   const [radioValue, _setRadioValue] = useState("4");
+  const [excludeAmbiguous, _setExcludeAmbiguous] = useState(false);
 
   const passwordRef = useRef(null);
 
@@ -70,7 +77,11 @@ export const Display = (): JSX.Element => {
     }
 
     if (val === "2") {
-      console.log("Easy to read");
+      _setIncludeUpper(true);
+      _setIncludeLower(true);
+      _setIncludeNumbers(true);
+      _setIncludeSymbols(true);
+      _setExcludeAmbiguous(true);
     }
 
     if (val === "3") {
@@ -96,6 +107,8 @@ export const Display = (): JSX.Element => {
     if (includeLower) charset = charset + lowercase;
     if (includeNumbers) charset = charset + numbers;
     if (includeSymbols) charset = charset + symbols;
+
+    if (excludeAmbiguous) charset = simpleCharset;
 
     for (let i = 1; i <= passwordLength; i++) {
       const char = Math.floor(Math.random() * charset.length + 1);

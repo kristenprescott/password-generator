@@ -34,7 +34,7 @@ export const PasswordOptions = ({
           </HStack>
         </Radio>
 
-        <Radio value="2">
+        {/* <Radio value="2">
           <HStack direction="row" isInline>
             <Text>Easy to read</Text>
             <Tooltip
@@ -46,9 +46,9 @@ export const PasswordOptions = ({
               </span>
             </Tooltip>
           </HStack>
-        </Radio>
+        </Radio> */}
 
-        <Radio value="3">
+        {/* <Radio value="3">
           <HStack direction="row" isInline>
             <Text>Easy to remember</Text>
             <Tooltip label="Use real words" hasArrow>
@@ -57,7 +57,7 @@ export const PasswordOptions = ({
               </span>
             </Tooltip>
           </HStack>
-        </Radio>
+        </Radio> */}
 
         <Radio value="4">
           <HStack direction="row" isInline>
