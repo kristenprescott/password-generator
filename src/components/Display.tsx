@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { InlineStylesModel } from "models/InlineStylesModel";
 import { useState, useRef } from "react";
+import { PasswordLengthInputs } from "./PasswordLengthInputs";
 
 const styles: InlineStylesModel = {
   main: {
@@ -29,23 +30,16 @@ export const Display = (): JSX.Element => {
   const passwordRef = useRef(null);
 
   const randomizePassword = () => {
-    let pass = "";
-    let str =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+";
+    let randomPassword = "";
+    let charset =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!'^+%&/()=?_#$½§{[]}|;:>÷`<.*-@é";
     for (let i = 1; i <= passwordLength; i++) {
-      const char = Math.floor(Math.random() * str.length + 1);
-      pass += str.charAt(char);
+      const char = Math.floor(Math.random() * charset.length + 1);
+      randomPassword += charset.charAt(char);
     }
-    _setPassword(pass);
+    _setPassword(randomPassword);
 
-    navigator.clipboard.writeText(pass);
-
-    // const randomPassword =
-    //   Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
-
-    // _setPassword(randomPassword);
-
-    // navigator.clipboard.writeText(randomPassword);
+    navigator.clipboard.writeText(randomPassword);
   };
 
   const generateNewPassword = () => {
@@ -73,13 +67,13 @@ export const Display = (): JSX.Element => {
             }
           />
           <Input
-            type="text"
-            variant="flushed"
-            value={password}
+            focusBorderColor="tomato"
             ref={passwordRef}
             size="lg"
-            focusBorderColor="tomato"
-            style={{ width: "300px" }}
+            style={{ width: "400px" }}
+            type="text"
+            value={password}
+            variant="flushed"
             isReadOnly
           />
         </InputGroup>
@@ -87,6 +81,11 @@ export const Display = (): JSX.Element => {
         <Button onClick={randomizePassword}>
           Generate & copy to clipboard
         </Button>
+
+        <PasswordLengthInputs
+          passwordLength={passwordLength}
+          _setPasswordLength={_setPasswordLength}
+        />
       </Stack>
     </div>
   );
