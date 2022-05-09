@@ -2,31 +2,31 @@ import { Stack, Checkbox, Icon, Text, HStack, Tooltip } from "@chakra-ui/react";
 import { FiInfo } from "react-icons/fi";
 
 interface Props {
-  isUppercase: boolean;
-  isLowercase: boolean;
-  isNumeric: boolean;
-  isSymbolic: boolean;
-  handleUppercaseChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleLowercaseChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleNumericChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSymbolicChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  includeUpper: boolean;
+  includeLower: boolean;
+  includeNumbers: boolean;
+  includeSymbols: boolean;
+  handleUpperChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleLowerChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleNumbersChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSymbolsChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const PasswordCharsCheckboxes = ({
-  isUppercase,
-  isLowercase,
-  isNumeric,
-  isSymbolic,
-  handleUppercaseChange,
-  handleLowercaseChange,
-  handleNumericChange,
-  handleSymbolicChange,
+export const CharacterOptions = ({
+  includeUpper,
+  includeLower,
+  includeNumbers,
+  includeSymbols,
+  handleUpperChange,
+  handleLowerChange,
+  handleNumbersChange,
+  handleSymbolsChange,
 }: Props) => {
   return (
     <Stack pl={6} mt={1} spacing={1}>
       <Checkbox
-        isChecked={isUppercase}
-        onChange={handleUppercaseChange}
+        isChecked={includeUpper}
+        onChange={handleUpperChange}
         spacing="1rem"
         defaultChecked
       >
@@ -39,9 +39,10 @@ export const PasswordCharsCheckboxes = ({
           </Tooltip>
         </HStack>
       </Checkbox>
+
       <Checkbox
-        isChecked={isLowercase}
-        onChange={handleLowercaseChange}
+        isChecked={includeLower}
+        onChange={handleLowerChange}
         spacing="1rem"
         defaultChecked
       >
@@ -54,30 +55,32 @@ export const PasswordCharsCheckboxes = ({
           </Tooltip>
         </HStack>
       </Checkbox>
+
       <Checkbox
-        isChecked={isNumeric}
-        onChange={handleNumericChange}
+        isChecked={includeNumbers}
+        onChange={handleNumbersChange}
         spacing="1rem"
         defaultChecked
       >
         <HStack direction="row" isInline>
-          <Text>Numeric</Text>
-          <Tooltip label="01234567890" hasArrow>
+          <Text>Numbers</Text>
+          <Tooltip label="0123456789" hasArrow>
             <span>
               <Icon as={FiInfo} w={4} h={4} color="blue.500" />
             </span>
           </Tooltip>
         </HStack>
       </Checkbox>
+
       <Checkbox
-        isChecked={isSymbolic}
-        onChange={handleSymbolicChange}
+        isChecked={includeSymbols}
+        onChange={handleSymbolsChange}
         spacing="1rem"
         defaultChecked
       >
         <HStack direction="row" isInline>
-          <Text>Symbolic</Text>
-          <Tooltip label="!@#$%^&*()<>,.?/[]{}-=_+|/" hasArrow>
+          <Text>Symbols</Text>
+          <Tooltip label="!'^+%&/()=?_#$½§{[]}|;:>÷`<.*-@é" hasArrow>
             <span>
               <Icon as={FiInfo} w={4} h={4} color="blue.500" />
             </span>
