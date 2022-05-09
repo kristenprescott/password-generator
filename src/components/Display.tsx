@@ -147,7 +147,7 @@ export const Display = (): JSX.Element => {
             focusBorderColor="tomato"
             ref={passwordRef}
             size="lg"
-            style={{ width: "400px" }}
+            style={{ width: "400px", fontFamily: "Fira Code" }}
             type="text"
             value={password}
             variant="flushed"
