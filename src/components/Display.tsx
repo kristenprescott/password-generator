@@ -27,7 +27,7 @@ const styles: InlineStylesModel = {
 
 export const Display = (): JSX.Element => {
   const [password, _setPassword] = useState("");
-  const [passwordLength, _setPasswordLength] = useState(18);
+  const [passwordLength, _setPasswordLength] = useState(16);
 
   const [includeUpper, _setIncludeUpper] = useState(true);
   const [includeLower, _setIncludeLower] = useState(true);
